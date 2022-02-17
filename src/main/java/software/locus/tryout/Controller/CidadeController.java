@@ -32,7 +32,7 @@ public class CidadeController {
 
     @PutMapping("/updateCidade")
     public Cidade updateCidade(@RequestBody Cidade cidade) {
-        if(cidadeService.updateCidade(cidade)) {
+        if (cidadeService.updateCidade(cidade)) {
             throw new ResponseStatusException(HttpStatus.OK, "City updated.");
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something's wrong.");
@@ -41,7 +41,7 @@ public class CidadeController {
 
     @DeleteMapping("/deleteCidade/{id}")
     public String deleteCidade(@PathVariable int id) {
-        if(cidadeService.deleteCidade(id)) {
+        if (cidadeService.deleteCidade(id)) {
             throw new ResponseStatusException(HttpStatus.OK, "City deleted created.");
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something's wrong.");
