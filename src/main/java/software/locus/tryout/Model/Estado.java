@@ -1,23 +1,24 @@
 package software.locus.tryout.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table (name = "estado")
+@Table(name = "estado")
 public class Estado {
 
+    @Getter
     @Id
     @GeneratedValue
     @Column(name = "estado_id")
     private int id;
 
+    @Getter
+    @Setter
     @Column(name = "nome")
     private String name;
 

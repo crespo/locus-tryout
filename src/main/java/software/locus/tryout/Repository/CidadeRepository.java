@@ -6,5 +6,5 @@ import software.locus.tryout.Model.Cidade;
 import java.util.List;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
-    List<Cidade> findByNameContains(String name);
+    List<Cidade> findByNomeContains(String nome);
 }

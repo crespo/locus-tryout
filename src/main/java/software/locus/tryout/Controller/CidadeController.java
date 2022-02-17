@@ -1,11 +1,13 @@
 package software.locus.tryout.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import software.locus.tryout.Model.Cidade;
 import software.locus.tryout.Service.CidadeService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class CidadeController {
@@ -19,11 +21,8 @@ public class CidadeController {
     }
 
     @GetMapping("/cidades")
-    public List<Cidade> findAllCidades(@RequestParam(required = false) String nome) {
-        if (nome != null) {
-            return cidadeService.getCidadesByName(nome);
-        }
-        return cidadeService.getCidades();
+    public List<Cidade> findAllCidades(@RequestParam(required = false) Map<String, String> params) {
+        return cidadeService.getCidades(params);
     }
 
     @PutMapping("/updateCidade")
