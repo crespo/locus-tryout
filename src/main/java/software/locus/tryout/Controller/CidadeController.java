@@ -1,7 +1,9 @@
 package software.locus.tryout.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import software.locus.tryout.Model.Cidade;
 import software.locus.tryout.Service.CidadeService;
 
@@ -16,7 +18,11 @@ public class CidadeController {
 
     @PostMapping("/addCidade")
     public Cidade addCidade(@RequestBody Cidade cidade) {
-        return cidadeService.saveCidade(cidade);
+        if (cidadeService.saveCidade(cidade)) {
+            throw new ResponseStatusException(HttpStatus.OK, "City created.");
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something's wrong.");
+        }
     }
 
     @GetMapping("/cidades")
@@ -26,11 +32,19 @@ public class CidadeController {
 
     @PutMapping("/updateCidade")
     public Cidade updateCidade(@RequestBody Cidade cidade) {
-        return cidadeService.updateCidade(cidade);
+        if(cidadeService.updateCidade(cidade)) {
+            throw new ResponseStatusException(HttpStatus.OK, "City updated.");
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something's wrong.");
+        }
     }
 
     @DeleteMapping("/deleteCidade/{id}")
     public String deleteCidade(@PathVariable int id) {
-        return cidadeService.deleteCidade(id);
+        if(cidadeService.deleteCidade(id)) {
+            throw new ResponseStatusException(HttpStatus.OK, "City deleted created.");
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something's wrong.");
+        }
     }
 }

@@ -23,8 +23,13 @@ public class CidadeService {
     @PersistenceContext
     EntityManager em;
 
-    public Cidade saveCidade(Cidade cidade) {
-        return cidadeRepository.save(cidade);
+    public boolean saveCidade(Cidade cidade) {
+        String nome = cidade.getNome();
+        if (cidadeRepository.existsByNome(nome)) {
+            return false;
+        }
+        cidadeRepository.save(cidade);
+        return true;
     }
 
     public List<Cidade> getCidades(Map<String, String> params) {
@@ -92,19 +97,29 @@ public class CidadeService {
         return query.getResultList();
     }
 
-    public Cidade updateCidade(Cidade cidade) {
-        Cidade existingCidade = cidadeRepository.findById(cidade.getId()).orElse(null);
-        existingCidade.setNome(cidade.getNome());
-        existingCidade.setPopulacao(cidade.getPopulacao());
-        existingCidade.setEstado(cidade.getEstado());
+    public boolean updateCidade(Cidade cidade) {
+        Cidade existingCidade = cidadeRepository
+                                    .findById(cidade.getId())
+                                    .orElse(null);
 
-        return cidadeRepository.save(existingCidade);
+        if (existingCidade != null) {
+            existingCidade.setNome(cidade.getNome());
+            existingCidade.setPopulacao(cidade.getPopulacao());
+            existingCidade.setEstado(cidade.getEstado());
+            cidadeRepository.save(existingCidade);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public String deleteCidade(int id) {
-        cidadeRepository.deleteById(id);
-
-        return "Estado " + id + " deleted.";
+    public boolean deleteCidade(int id) {
+        if (cidadeRepository.existsById(id)) {
+            cidadeRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static boolean isInteger(String str) {
