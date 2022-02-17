@@ -48,7 +48,7 @@ public class CidadeService {
         }
 
         boolean order = false;
-        boolean reverse = Objects.equals(params.get("ordernarReverso"), "True");
+        boolean reverse = Objects.equals(params.get("ordenarReverso"), "True");
 
         if (Objects.equals(params.get("ordenarNome"), "True")) {
             if (!reverse) {
@@ -80,7 +80,6 @@ public class CidadeService {
         if (!order && !reverse) {
             orders.add(cb.asc(root.get("id")));
         } else if (!order) {
-            System.out.println("teste");
             orders.add(cb.desc(root.get("id")));
         }
 
@@ -89,9 +88,8 @@ public class CidadeService {
                 .select(root);
 
         Query<Cidade> query = (Query<Cidade>) em.createQuery(cq);
-        List<Cidade> results = query.getResultList();
 
-        return results;
+        return query.getResultList();
     }
 
     public Cidade updateCidade(Cidade cidade) {
