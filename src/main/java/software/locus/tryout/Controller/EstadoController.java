@@ -22,24 +22,4 @@ public class EstadoController {
     public List<Estado> findAllEstados() {
         return estadoService.getEstados();
     }
-
-    @GetMapping("/estado/{id}")
-    public Estado findEstadoById(@PathVariable int id) {
-        return estadoService.getEstadoById(id);
-    }
-
-    @GetMapping("/estado/{name}")
-    public Estado findEstadoByName(@PathVariable String name) {
-        return estadoService.getEstadoByName(name);
-    }
-
-//    @PutMapping("/updateEstado")
-//    public Estado updateEstado(@RequestBody Estado estado) {
-//        return estadoService.updateEstado(estado);
-//    }
-
-//    @DeleteMapping("/deleteEstado/{id}")
-//    public String deleteEstado(@PathVariable int id) {
-//        return estadoService.deleteEstado(id)
-//    }
 }

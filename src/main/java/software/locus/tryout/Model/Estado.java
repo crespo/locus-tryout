@@ -19,6 +19,6 @@ public class Estado {
     private int id;
 
     @Column(name = "nome")
-    private String name;
+    private String nome;
 
 }
