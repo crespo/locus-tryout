@@ -1,6 +1,7 @@
 # Tryout for Locus Custom Software
 This is a REST API with all the CRUD methods for the tables City and State.
 
+Stack: Java, Spring Boot, JPA, Criteria API.
 ## Installation
 
 ### Requirements
