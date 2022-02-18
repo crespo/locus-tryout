@@ -1,6 +1,7 @@
 package software.locus.tryout.Controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,12 @@ public class EstadoController {
     private EstadoService estadoService;
 
     @PostMapping("/addEstado")
-    @Operation(summary = "Add a state to the database")
+    @Operation(
+            summary = "Add a state to the database",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation"),
+                    @ApiResponse(responseCode = "400", description = "Invalid State Name supplied")
+            })
     public Estado addEstado(@RequestBody Estado estado) {
         if (estadoService.saveEstado(estado)) {
             throw new ResponseStatusException(HttpStatus.OK, "State created.");
@@ -37,7 +43,12 @@ public class EstadoController {
     }
 
     @PutMapping("/updateEstado")
-    @Operation(summary = "Updates a state information")
+    @Operation(
+            summary = "Updates a state information",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation"),
+                    @ApiResponse(responseCode = "400", description = "Invalid State ID supplied")
+            })
     public Estado updateEstado(@RequestBody Estado estado) {
         if (estadoService.updateEstado(estado)) {
             throw new ResponseStatusException(HttpStatus.OK, "State updated.");
@@ -47,7 +58,12 @@ public class EstadoController {
     }
 
     @DeleteMapping("/deleteEstado/{id}")
-    @Operation(summary = "Deletes a state")
+    @Operation(
+            summary = "Deletes a state",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation"),
+                    @ApiResponse(responseCode = "400", description = "Invalid State ID supplied")
+            })
     public String deleteEstado(@PathVariable int id) {
         if (estadoService.deleteEstado(id)) {
             throw new ResponseStatusException(HttpStatus.OK, "State updated.");
