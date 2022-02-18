@@ -24,10 +24,10 @@ public class CidadeService {
     EntityManager em;
 
     public boolean saveCidade(Cidade cidade) {
-        String nome = cidade.getNome();
-        if (cidadeRepository.existsByNome(nome)) {
-            return false;
-        }
+//        String nome = cidade.getNome();
+//        if (cidadeRepository.existsByNome(nome)) {
+//            return false;
+//        }
         cidadeRepository.save(cidade);
         return true;
     }
@@ -52,41 +52,27 @@ public class CidadeService {
             predicate.getExpressions().add(cb.lt(root.get("populacao"), Integer.parseInt(params.get("populacao_max"))));
         }
 
-        boolean order = false;
-        boolean reverse = Objects.equals(params.get("ordenarReverso"), "True");
-
-        if (Objects.equals(params.get("ordenarNome"), "True")) {
-            if (!reverse) {
-                orders.add(cb.asc(root.get("nome")));
-            } else {
-                orders.add(cb.desc(root.get("nome")));
-            }
-            order = true;
+        if (Objects.equals(params.get("ordenarNome"), "asc")) {
+            orders.add(cb.asc(root.get("nome")));
+        } else if (Objects.equals(params.get("ordenarNome"), "desc")) {
+            orders.add(cb.desc(root.get("nome")));
         }
 
-        if (Objects.equals(params.get("ordenarPopulacao"), "True")) {
-            if (!reverse) {
-                orders.add(cb.asc(root.get("populacao")));
-            } else {
-                orders.add(cb.desc(root.get("populacao")));
-            }
-            order = true;
+        if (Objects.equals(params.get("ordenarPopulacao"), "asc")) {
+            orders.add(cb.asc(root.get("populacao")));
+        } else if (Objects.equals(params.get("ordenarPopulacao"), "desc")) {
+            orders.add(cb.desc(root.get("populacao")));
         }
 
-        if (Objects.equals(params.get("ordenarEstado"), "True")) {
-            if (!reverse) {
-                orders.add(cb.asc(root.get("estado")));
-            } else {
-                orders.add(cb.desc(root.get("estado")));
-            }
-            order = true;
+        if (Objects.equals(params.get("ordenarEstado"), "asc")) {
+            orders.add(cb.asc(root.get("estado")));
+        } else if (Objects.equals(params.get("ordenarEstado"), "desc")) {
+            orders.add(cb.desc(root.get("estado")));
         }
 
-        if (!order && !reverse) {
-            orders.add(cb.asc(root.get("id")));
-        } else if (!order) {
-            orders.add(cb.desc(root.get("id")));
-        }
+//        if (Objects.equals(params.get("ordenarReverso"), "True")) {
+//            orders.add(cb.desc(root.get("id")));
+//        }
 
         cq.where(cb.and(predicate))
                 .orderBy(orders)
