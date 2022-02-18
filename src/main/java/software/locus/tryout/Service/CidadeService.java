@@ -24,10 +24,9 @@ public class CidadeService {
     EntityManager em;
 
     public boolean saveCidade(Cidade cidade) {
-//        String nome = cidade.getNome();
-//        if (cidadeRepository.existsByNome(nome)) {
-//            return false;
-//        }
+        if (isInteger(cidade.getNome())) {
+            return false;
+        }
         cidadeRepository.save(cidade);
         return true;
     }
