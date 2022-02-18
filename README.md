@@ -1,12 +1,12 @@
 # Tryout for Locus Custom Software
 This is a REST API with all the CRUD methods for the tables City and State.
 
-## Running the application
+## Installation
 
 ### Requirements
 - Java 11
 
-### Installation
+### Running the application
 First clone the project to your machine using the following command on a terminal:
 #### ```git clone https://github.com/crespo/locus-tryout.git```
 Then you want to open the root folder:
