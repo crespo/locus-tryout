@@ -5,7 +5,10 @@ This is a REST API with all the CRUD methods for the tables City and State.
 
 ### Requirements
 - Java 11
+- MySQL
 
+### Creating database
+Create an empty database named `tryout`
 ### Running the application
 First clone the project to your machine using the following command on a terminal:
 #### ```git clone https://github.com/crespo/locus-tryout.git```
